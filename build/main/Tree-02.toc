@@ -1,0 +1,5 @@
+('c:\\users\\45mar\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\pytaglib-1.4.5-py3.8-win-amd64.egg',
+ None,
+ {'*.pyc', 'EGG-INFO', '*.pyd', '*.py', '*.pyw', '*.cp38-win_amd64.pyd'},
+ 'DATA',
+ [])

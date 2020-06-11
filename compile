@@ -1,0 +1,4 @@
+pyinstaller --paths C:\Users\45mar\GitHub\PyQt5x\venvq\Lib\site-packages main.py
+
+
+zainstalowac sip
