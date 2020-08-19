@@ -1,0 +1,200 @@
+#: import ListAdapter kivy.adapters.listadapter.ListAdapter
+#: import ListItemButton kivy.uix.listview.ListItemButton
+
+
+<ListItemButton>
+    on_press: app.root.change(*args)
+
+
+
+<tagEditor>:
+    cols: 1
+    rows: 2
+
+    canvas.before:
+        Color:
+            rgba: 0.54, 0.54, 0.54, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        cols: 3
+        rows: 1
+
+
+        FileChooserListView:
+            id: file_explorer
+            on_selection: root.select(file_explorer.selection)
+
+
+        GridLayout:
+            cols: 1
+            rows: 3
+
+            ListView:
+                id: textPointsList
+                adapter:
+                    ListAdapter(
+                    data=root.textTimesValues,
+                    selection_mode='single',
+                    allow_empty_selection=True,
+                    cls=ListItemButton)
+
+            TextInput:
+                id: text
+                text: root.text
+
+            GridLayout:
+                cols: 5
+                rows: 1
+                size_hint_y: None
+                height: 50
+
+                Button:
+                    text: 'Add'
+                    on_press:root.addText(text.text, textTimeValue.text)
+
+                Button:
+                    text: 'Remove'
+
+                TextInput:
+                    id: textTimeValue
+                    text: root.oneTimeTextValue
+                    input_filter:'float'
+
+
+                Button:
+                    text: 'test'
+
+                Button:
+                    text: 'save'
+                    on_press:root.save(title.text, artist.text, album.text, number.text)
+
+
+
+
+
+        GridLayout:
+            cols: 1
+            rows: 3
+
+            GridLayout:
+                cols: 2
+                rows: 4
+                size_hint_y: None
+                height: 150
+
+                Label:
+                    text: 'Title:'
+                    size_hint_x: None
+                    width: 100
+
+                TextInput:
+                    id: title
+                    text: root.title
+
+                Label:
+                    text: 'Artist:'
+                    size_hint_x: None
+                    width: 100
+
+                TextInput:
+                    id: artist
+                    text: root.artist
+
+                Label:
+                    text: 'Album:'
+                    size_hint_x: None
+                    width: 100
+
+                TextInput:
+                    id: album
+                    text: root.album
+
+                Label:
+                    text: 'No:'
+                    size_hint_x: None
+                    width: 100
+
+                TextInput:
+                    id: number
+                    text: root.number
+
+
+            ListView:
+                id: stopPointsList
+                adapter:
+                    ListAdapter(
+                    data=root.stopPoints,
+                    selection_mode='single',
+                    allow_empty_selection=True,
+                    cls=ListItemButton)
+
+
+
+
+
+            GridLayout:
+                cols: 5
+                rows: 1
+                size_hint_y: None
+                height: 50
+
+                Button:
+                    text: 'Add'
+                    on_press:root.stopPoints.append(timeStopValue.text)
+
+                Button:
+                    text: 'Remove'
+                    on_press: root.remove(timeStopValue.text)
+
+                TextInput:
+                    id: timeStopValue
+                    text: root.stopValue
+                    input_filter:'float'
+
+
+                Button:
+                    text: 'test'
+                    on_press:root.testPoint(timeStopValue.text)
+
+                Button:
+                    text: 'save'
+                    on_press:root.save(title.text, artist.text, album.text, number.text)
+    GridLayout:
+        cols: 4
+        rows: 1
+        size_hint_y: None
+        height: 50
+
+        Slider:
+            orientation: 'horizontal'
+            size_hint_x: None
+            width: 700
+            min: 0
+            max: root.length
+            value: root.position
+            id: positionSlider
+            value_track: True
+            value_track_color: [1, 0, 0, 1]
+            on_touch_move: root.sliderMoved(positionSlider.value, args[1].pos)
+            on_touch_up: root.sliderMoved(positionSlider.value, args[1].pos)
+
+
+        Label:
+            text: '%s' % int(positionSlider.value/1000) if positionSlider.value else '0'
+            width: 150
+
+
+
+
+        Button:
+            text: 'play'
+            on_press:root.playPause()
+            width: 150
+
+        Button:
+            text: 'stop'
+            on_press:root.stop()
+            width: 150

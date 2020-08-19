@@ -64,7 +64,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.mediaplayer.stop()
             self.mediaplayer = vlc.MediaPlayer(self.files_path[self.files[ix.row()]])
             self.slider_time.setMaximum(10000)
-            self.mediaplayer.play()
+            #self.mediaplayer.play()
             self.model_time_text.clear()
             self.model_time_stop.clear()
             self.time_stops = []
@@ -191,6 +191,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         print('create new file list')
         self.model.clear()
         self.files_path.clear()
+        self.files.clear()
 
         file = str(QFileDialog.getExistingDirectory(self, "Select Directory"))
         self.importAudioFiles(file)
