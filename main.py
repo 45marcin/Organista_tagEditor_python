@@ -235,11 +235,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         try:
             self.text_album.setText(x.tags["ALBUM"][0])
         except:
-            None
+            self.text_album.setText("")
         try:
             self.text_title.setText(x.tags["TITLE"][0])
         except:
-            None
+            self.text_title.setText("")
         try:
             self.unpackJson(self.Decrypt(x.tags["COMMENT"][0]))
         except:
