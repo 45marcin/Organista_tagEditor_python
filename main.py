@@ -3,6 +3,7 @@ import locale
 import sys
 from os import listdir, path
 
+import requests
 from PyQt5 import QtWidgets, uic, QtCore
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
@@ -28,6 +29,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btn_remove_stop_point.clicked.connect(self.on_btn_remove_time_clicked)
         self.btn_add_text.clicked.connect(self.on_btn_add_text_clicked)
         self.btn_remove_text.clicked.connect(self.on_btn_remove_text_clicked)
+
+        self.btn_test_text.clicked.connect(self.on_text_test_clicked)
 
         self.files = []
         self.files_path = {}
@@ -55,8 +58,17 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.time_text = []
         self.texts = {}
         print(locale.getlocale())
-
         # self.lv_files.clicked[QtCore.QModelIndex].connect(self.on_item_changed)
+
+    @pyqtSlot()
+    def on_text_test_clicked(self):
+        try:
+            url = "http://" + self.text_ip_adress.toPlainText() + ":9000/showThisText"
+            data = {'text': self.text_text_text.toPlainText(), 'size': 12, 'color': [255,255,255], 'aligment':"left"}
+            headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+            requests.post(url, data=json.dumps(data), headers=headers)
+        except:
+            None
 
     @pyqtSlot()
     def on_item_changed(self):
