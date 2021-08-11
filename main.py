@@ -318,7 +318,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         for x in self.texts:
             tmp = {}
             tmp["text"] = self.texts[x]
-            tmp["time"] = x
+            tmp["time"] = float(x)
             dickt["TEXT"].append(tmp)
 
 
@@ -327,7 +327,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             dickt["number"] = int(self.text_number.toPlainText())
         except:
             dickt["number"] = 0
-        return json.dumps(dickt).encode('utf-8')
+        return json.dumps(dickt).encode("ASCII")
 
     def Decrypt(self, tagValue):
         return tagValue
