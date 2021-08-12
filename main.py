@@ -91,7 +91,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         for ix in self.lv_text.selectedIndexes():
             print(ix.row())
             print(ix.data())
-            self.text_text_text.setText(self.texts[ix.data()])
+            self.text_text_text.setText(self.texts[float(ix.data())])
             self.text_time_text.setText(ix.data())
 
     @pyqtSlot()
@@ -106,7 +106,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     @pyqtSlot()
     def on_btn_remove_text_clicked(self):
         time = float(self.text_time_text.toPlainText())
-        del self.texts[str(time)]
+        del self.texts[time]
         self.time_text.remove(time)
         self.reloadTexts()
 
